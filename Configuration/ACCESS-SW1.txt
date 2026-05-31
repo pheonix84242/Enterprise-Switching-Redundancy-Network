@@ -1,0 +1,31 @@
+hostname ACCESS-SW1
+vtp domain ENTERPRISE
+vtp mode client
+vtp password Cisco123
+vtp version 2
+
+spanning-tree mode rapid-pvst
+
+interface range fa0/1-2
+ channel-group 3 mode active
+
+interface port-channel 3
+ switchport mode trunk
+
+interface fa0/20
+ switchport mode trunk
+
+interface fa0/24
+ switchport mode trunk
+
+interface fa0/11
+ switchport mode access
+ switchport access vlan 10
+
+interface fa0/12
+ switchport mode access
+ switchport access vlan 20
+
+interface vlan 99
+ ip address 192.168.99.4 255.255.255.0
+ no shutdown

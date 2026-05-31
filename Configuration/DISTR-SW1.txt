@@ -1,0 +1,33 @@
+hostname DISTR-SW1
+vtp domain ENTERPRISE
+vtp mode server
+vtp password Cisco123
+vtp version 2
+
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 root secondary
+spanning-tree vlan 20 root secondary
+spanning-tree vlan 30 root secondary
+spanning-tree vlan 99 root secondary
+
+interface range fa0/1-2
+ channel-group 1 mode active
+
+interface port-channel 1
+ switchport mode trunk
+
+interface range fa0/5-6
+ channel-group 3 mode active
+
+interface port-channel 3
+ switchport mode trunk
+
+interface fa0/10
+ switchport mode trunk
+
+interface fa0/20
+ switchport mode trunk
+
+interface vlan 99
+ ip address 192.168.99.2 255.255.255.0
+ no shutdown

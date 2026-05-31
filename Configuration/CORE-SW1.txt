@@ -1,0 +1,36 @@
+hostname CORE-SW1
+vtp domain ENTERPRISE
+vtp mode server
+vtp password Cisco123
+vtp version 2
+
+vlan 10
+ name HR
+vlan 20
+ name Finance
+vlan 30
+ name IT
+vlan 99
+ name Management
+
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root primary
+spanning-tree vlan 30 root primary
+spanning-tree vlan 99 root primary
+
+interface range fa0/1-2
+ channel-group 1 mode active
+
+interface port-channel 1
+ switchport mode trunk
+
+interface range fa0/3-4
+ channel-group 2 mode active
+
+interface port-channel 2
+ switchport mode trunk
+
+interface vlan 99
+ ip address 192.168.99.1 255.255.255.0
+ no shutdown
